@@ -14,12 +14,9 @@ jobs:
       - name: ha-ha
         id: ha
         uses: ./.github/actions/joke-action
-      - name: retrieve joke from java
-        id: retrieve
-        run: echo "repeating the joke from actions script ${{ steps.ha.outputs.joke }}" >> $GITHUB_OUTPUT
       - name: comment joke
-        uses: peter-evans/create-or-update-comment@v2
+        uses: ben-z/actions-comment-on-issue@1.0.2
         id: commentedjoke
         with:
-          issue-number: ${{ github.event.issue.number }}
-          body: "${{join(steps.retrieve.outputs.*, '\n')}}"
+          message: "${{ steps.ha.outputs.joke }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
