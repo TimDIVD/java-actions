@@ -12,4 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: ha-ha
+        id: ha
         uses: ./.github/actions/joke-action
+      - name: Get the output time
+        run: echo "repeating the joke from actions script ${{ steps.ha.outputs.joke }}"
