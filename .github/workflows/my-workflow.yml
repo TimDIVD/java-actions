@@ -1,23 +1,40 @@
-name: JS Actions
+name: "Generate and comment joke"
 
 on:
   issues:
     types: [labeled]
 
 jobs:
-  action:
-    if: ${{ !github.event.repository.is_template }}
+  generate-joke:
+    name: Generate-Joke
     runs-on: ubuntu-latest
-
+    
+    outputs:
+      storedjoke: ${{ steps.store-joke.outputs.storedjoke }}
     steps:
       - uses: actions/checkout@v3
       - name: ha-ha
         id: ha
         uses: ./.github/actions/joke-action
-      - name: comment joke
-        id: commentedjoke
-        uses: mvkaran/comment-on-issue@v1.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          LABEL: 'first joke'
-          COMMENT: 'Joke: ${{ steps.ha.outputs.joke }}'
+      - name: Store joke output
+        id: store-joke
+        run: echo "storedjoke=${{ steps.ha.outputs.joke }}" >> $GITHUB_OUTPUT
+          
+  comment-joke:
+    needs: generate-joke
+    name: Comment-Joke
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check for find-comment
+        run: echo "This is the input of find-comment ${{ needs.job-a.outputs.comment }}
+      
+      #- name: comment joke
+        #id: commentedjoke
+        #uses: mvkaran/comment-on-issue@v1.0
+        #env:
+          #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          #LABEL: 'first joke'
+          #COMMENT: 'Joke: ${{ steps.ha.outputs.joke }}'
+      
+      
