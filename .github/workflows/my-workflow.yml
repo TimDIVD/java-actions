@@ -15,8 +15,9 @@ jobs:
         id: ha
         uses: ./.github/actions/joke-action
       - name: comment joke
-        uses: ben-z/actions-comment-on-issue@1.0.2
         id: commentedjoke
-        with:
-          message: "${{ steps.ha.outputs.joke }}"
+        uses: mvkaran/comment-on-issue@v1.0
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LABEL: 'first joke'
+          COMMENT: 'Comment text you want to add'
