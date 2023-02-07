@@ -19,5 +19,4 @@ jobs:
         id: commentedjoke
         with:
           issue-number: ${{ github.event.issue.number }}
-          body: |
-            The joke: + ${{ steps.ha.outputs.joke }}
+          body: ${{ steps.ha.outputs.joke }}
