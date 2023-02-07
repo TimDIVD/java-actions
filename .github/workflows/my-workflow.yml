@@ -14,7 +14,9 @@ jobs:
       - name: ha-ha
         id: ha
         uses: ./.github/actions/joke-action
-      - name: retrieve issue number
-        run: echo ${{ github.event.issue.number }}
-      
-    
+      - name: Comment joke
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            ${{ steps.ha.outputs.joke }}
