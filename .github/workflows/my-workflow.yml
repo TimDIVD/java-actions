@@ -20,4 +20,4 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            The joke: ${{ steps.ha.outputs.joke }}
+            The joke: + ${{ steps.ha.outputs.joke }}
