@@ -27,7 +27,7 @@ jobs:
     
     steps:
       - name: Check for find-comment
-        run: echo "This is the input of the joke ${{ needs.generate-joke.outputs.storedjoke }}
+        run: echo "This is the input of the joke ${{ needs.generate-joke.outputs.storedjoke }}"
       
       #- name: comment joke
         #id: commentedjoke
