@@ -16,7 +16,8 @@ jobs:
         uses: ./.github/actions/joke-action
       - name: Comment joke
         uses: peter-evans/create-or-update-comment@v2
+        id: commentedjoke
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            ${{ steps.ha.outputs.joke }}
+            The joke:${{ steps.ha.outputs.joke }}
