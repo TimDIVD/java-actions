@@ -14,5 +14,7 @@ jobs:
       - name: ha-ha
         id: ha
         uses: ./.github/actions/joke-action
-      - name: Get the output time
-        run: echo "repeating the joke from actions script ${{ steps.ha.outputs.joke }}"
+      - name: retrieve issue number
+        run: echo ${{ github.event.issue.number }}
+      
+    
